@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Login">
+        <ImageView
+            android:id="@+id/imagevback"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="TODO"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background_image_one_signin" />
+
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="133dp"
+        android:layout_height="172dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btu1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/round_bg"
+        android:text="@string/logout"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/round_bg"
+        android:drawableStart="@drawable/ic_firebase_logo"
+        android:drawableLeft="@drawable/ic_firebase_logo"
+        android:text="@string/login_with_google"
+        tools:visibility="visible" />
+
+</RelativeLayout>

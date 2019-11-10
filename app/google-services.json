@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "337520280689",
+    "firebase_url": "https://demomini-9868b.firebaseio.com",
+    "project_id": "demomini-9868b",
+    "storage_bucket": "demomini-9868b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:337520280689:android:e3af26ab459e5a29",
+        "android_client_info": {
+          "package_name": "com.example.demomini"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "337520280689-u5jsae63sh1iv62jifroc4j9uvnvkhb4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.demomini",
+            "certificate_hash": "bd3c1c622bb0a334555d1a7d6a528c6ec1ef1716"
+          }
+        },
+        {
+          "client_id": "337520280689-cnfvg13mb42s871a7fvsm47lbkebabhg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbm6Y3cUF9kWxXc29URyC_8TRCXbmF07o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "337520280689-cnfvg13mb42s871a7fvsm47lbkebabhg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
