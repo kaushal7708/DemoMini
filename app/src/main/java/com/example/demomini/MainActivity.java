@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.Menu;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +24,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,6 +48,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Transformation;
 
 public class MainActivity extends AppCompatActivity
 		implements NavigationView.OnNavigationItemSelectedListener {
@@ -71,7 +74,7 @@ public class MainActivity extends AppCompatActivity
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+				Snackbar.make(view, "Only Admin use this feature", Snackbar.LENGTH_LONG)
 						.setAction("Action", null).show();
 			}
 		});
@@ -157,12 +160,49 @@ public class MainActivity extends AppCompatActivity
 				holder.setPost_text(model.getName());
 				holder.setPost_Image(model.getImage());
 
-				holder.query.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
-					}
+				holder.cv.setOnClickListener(view ->{
+					Intent i = new Intent(getApplicationContext(),ItemCheckView.class);
+
+					i.putExtra("Image",model.getImage());
+					i.putExtra("time",model.getTime());
+					i.putExtra("title",model.getTitle());
+					i.putExtra("desc",model.getName());
+					Log.v("TT","Check box");
+					startActivity(i);
+
 				});
+
+				holder.post_Image.setOnClickListener(view->{
+
+						Intent i = new Intent(getApplicationContext(),ImagePost.class);
+						i.putExtra("s_Image",model.getImage());
+						Log.v("TT","I click Main ");
+						startActivity(i);
+
+
+				});
+				holder.details.setOnClickListener(view -> {
+					Intent i = new Intent(getApplicationContext(),ItemCheckView.class);
+
+					i.putExtra("Image",model.getImage());
+					i.putExtra("time",model.getTime());
+					i.putExtra("title",model.getTitle());
+					i.putExtra("desc",model.getName());
+					Log.v("TT","Ho gya kaand");
+					startActivity(i);
+//					holder.t.setVisibility(View.VISIBLE);
+//					//Toast.makeText(MainActivity.this, String.valueOf(position), Toast.LENGTH_SHORT).show();
+//					holder.t.setText("");
+//					holder.query.setEnabled(true);
+//					holder.details.setEnabled(false);
+				});
+//				holder.query.setOnClickListener(view -> {
+//					String s = holder.t.getText().toString();
+//					Toast.makeText(MainActivity.this, "You select "+String.valueOf(position+1)+" And "+s, Toast.LENGTH_SHORT).show();
+//					holder.t.setVisibility(View.GONE);
+//					holder.details.setEnabled(true);
+//					holder.query.setEnabled(false);
+//				});
 			}
 
 		};
@@ -178,6 +218,10 @@ public class MainActivity extends AppCompatActivity
 			super.onBackPressed();
 		}
 	}
+
+	//34861014
+	//android:background="#749FEB"
+
 
 	@Override
 	protected void onStop() {
@@ -203,37 +247,37 @@ public class MainActivity extends AppCompatActivity
 	public static class postHolder extends RecyclerView.ViewHolder {
 		View view;
 		TextView dept_name, post_time, post_text;
+		CardView cv;
 		Button query, details;
 		ImageView dept_Image, post_Image;
-
+		EditText t;
 		public postHolder(@NonNull View itemView) {
 			super(itemView);
+			details=itemView.findViewById(R.id.std_details);
+			t=itemView.findViewById(R.id.editText);
+			cv = itemView.findViewById(R.id.head_holder);
 			dept_name = itemView.findViewById(R.id.dept_name);
 			post_time = itemView.findViewById(R.id.post_time);
 			post_text = itemView.findViewById(R.id.post_text);
 			post_Image = itemView.findViewById(R.id.image_post);
-			query = itemView.findViewById(R.id.std_query);
 			view = itemView;
 		}
 
 		public void setDept_name(String name) {
-
 			dept_name.setText(name);
 		}
 
 		public void setPost_time(String time) {
-
 			post_time.setText(time);
 		}
 
 		public void setPost_text(String text) {
-
 			post_text.setText(text);
 		}
 
-
 		public void setPost_Image(String Image) {
-			Picasso.get().load(Image).into(post_Image);
+
+			Picasso.get().load(Image).fit().into(post_Image);
 		}
 	}
 
@@ -267,7 +311,7 @@ public class MainActivity extends AppCompatActivity
 
 		if (id == R.id.nav_home) {
 			// Handle the camera action
-			startActivity(new Intent(this, postactivity.class));
+			startActivity(new Intent(this, MainActivity.class));
 			finish();
 		} else if (id == R.id.nav_gallery) {
 
@@ -276,10 +320,19 @@ public class MainActivity extends AppCompatActivity
 		} else if (id == R.id.nav_tools) {
 
 		} else if (id == R.id.nav_share) {
+			FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+			if (user != null) {
+				String mail = user.getEmail();
+				if (mail.equals("kaushal7708@gmail.com")) {
+					startActivity(new Intent(this, postactivity.class));
+					finish();
+				}else{
+					Toast.makeText(this,"Only Admin can post ",Toast.LENGTH_LONG).show();
+				}
 
+			}
 		} else if (id == R.id.nav_send) {
 			startActivity(new Intent(this,Login.class));
-
 		}
 
 		DrawerLayout drawer = findViewById(R.id.drawer_layout);

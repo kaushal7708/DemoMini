@@ -12,8 +12,17 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_send">Login</string>
+
+
     <string name="login_with_google">Login with Google</string>
     <string name="logout">Logout</string>
     <string name="communicate">Communicate</string>
+    <string name="h" />
+    <string name="query">Query</string>
+    <string name="department_name">Department Name</string>
+    <string name="submit_details">Read More...</string>
+    <string name="time">Time</string>
+    <string name="todo">TODO</string>
+    <string name="nope">nope</string>
 </resources>

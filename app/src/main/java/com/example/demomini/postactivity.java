@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -81,15 +82,9 @@ public class postactivity extends AppCompatActivity {
 		desc = dd.getText().toString().trim();
 		date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
 		if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(desc) && !TextUtils.isEmpty(date) && Image_path != null) {
-			Log.v("TT", "YTRTRR   " + date);
-			Log.v("TT", "YTRTRR   " + desc);
-			Log.v("TT", "YTRTRR   " + title);
 			StorageReference reference = sr.child("Post_Image").child(Image_path.getLastPathSegment());
-			Log.v("TT", "YTRTRR   finding 2 "+reference.getName() );
 			final StorageReference reference2 = sr.child("Post_Image");
-			Log.v("TT", "Connected   with "+reference2.getName() );
 			reference.putFile(Image_path).addOnSuccessListener(taskSnapshot -> {
-				Log.v("TT", "YTRTRR   uploading" );
 				Toast.makeText(postactivity.this,"Image is Uploaded. ",Toast.LENGTH_LONG).show();
 				reference2.child(Image_path.getLastPathSegment()).getDownloadUrl().addOnSuccessListener(uri -> {
 					//a.setImage(uri.toString());
@@ -105,6 +100,11 @@ public class postactivity extends AppCompatActivity {
 					startActivity(new Intent(postactivity.this, MainActivity.class));
 					finish();
 				});
+			}).addOnFailureListener(new OnFailureListener() {
+				@Override
+				public void onFailure(@NonNull Exception exception) {
+					Log.v("TT",exception.getLocalizedMessage());
+				}
 			});
 		}else{
 			d.dismiss();
@@ -128,3 +128,25 @@ public class postactivity extends AppCompatActivity {
 		}
 	}
 }
+
+/*Log.v("TT", "Connected   with "+reference2.getName() );
+			reference.putFile(Image_path).addOnSuccessListener(taskSnapshot -> {
+				Log.v("TT", "YTRTRR   uploading" );
+				Toast.makeText(postactivity.this,"Image is Uploaded. ",Toast.LENGTH_LONG).show();
+				reference2.child(Image_path.getLastPathSegment()).getDownloadUrl().addOnSuccessListener(uri -> {
+					//a.setImage(uri.toString());
+					//i=uri;
+					DatabaseReference dref2 = dRef.push();
+					dref2.child("title").setValue(title);
+					dref2.child("name").setValue(desc);
+					dref2.child("time").setValue(date);
+					dref2.child("Image").setValue(uri.toString());
+					Log.v("TT", "YTRTRR   " + uri.toString());
+					d.dismiss();
+					Toast.makeText(postactivity.this,"Data is Uploaded. ",Toast.LENGTH_LONG).show();
+					startActivity(new Intent(postactivity.this, MainActivity.class));
+					finish();
+				});
+			});
+
+ */
