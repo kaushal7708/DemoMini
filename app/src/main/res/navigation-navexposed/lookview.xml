@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/lookview"
+    app:startDestination="@id/login">
+
+    <activity
+        android:id="@+id/login"
+        android:name="com.example.demomini.Login"
+        android:label="activity_login"
+        tools:layout="@layout/activity_login" />
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="com.example.demomini.MainActivity"
+        android:label="app_bar_main"
+        tools:layout="@layout/app_bar_main" />
+    <activity
+        android:id="@+id/itemCheckView"
+        android:name="com.example.demomini.ItemCheckView"
+        android:label="activity_item_check_view"
+        tools:layout="@layout/activity_item_check_view" />
+    <activity
+        android:id="@+id/postactivity"
+        android:name="com.example.demomini.postactivity"
+        android:label="activity_postactivity"
+        tools:layout="@layout/activity_postactivity" />
+    <activity
+        android:id="@+id/imagePost"
+        android:name="com.example.demomini.ImagePost"
+        android:label="activity_image_post"
+        tools:layout="@layout/activity_image_post" />
+    <fragment android:id="@+id/placeholder" >
+        <action
+            android:id="@+id/action_placeholder_to_login"
+            app:destination="@id/login" />
+    </fragment>
+</navigation>

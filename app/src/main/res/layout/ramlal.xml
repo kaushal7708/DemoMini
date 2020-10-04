@@ -18,7 +18,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimary">
+        android:background="@color/common_google_signin_btn_text_light_disabled">
 
         <RelativeLayout
             android:id="@+id/head_part"
@@ -68,13 +68,6 @@
                         android:layout_weight="60"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/post_time"
-                        android:layout_width="117dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/time"
-                        android:layout_weight="40"
-                        android:textSize="12sp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -87,6 +80,15 @@
             android:layout_below="@+id/head_part"
             android:layout_marginTop="10dp"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="179dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="40"
+                android:text="@string/time"
+                android:textSize="12sp" />
+
             <TextView
                 android:id="@+id/post_text"
                 android:layout_width="match_parent"

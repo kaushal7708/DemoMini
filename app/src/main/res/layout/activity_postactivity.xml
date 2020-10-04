@@ -6,15 +6,21 @@
     android:layout_height="match_parent"
     tools:context=".postactivity">
 
+
     <ImageButton
         android:id="@+id/img_post"
-        android:layout_width="match_parent"
-        android:layout_height="243dp"
+        android:layout_width="366dp"
+        android:layout_height="239dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="14dp"
         android:adjustViewBounds="true"
         android:background="@color/colorAccent"
         android:scaleType="center"
         android:src="@mipmap/add_btn" />
-
 
     <EditText
         android:id="@+id/title"
@@ -44,4 +50,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:text="Post" />
+
 </RelativeLayout>

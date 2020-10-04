@@ -2,8 +2,11 @@ package com.example.demomini;
 
 import com.example.demomini.R.layout;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,6 +36,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.firebase.ui.database.SnapshotParser;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -45,6 +49,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -87,8 +92,25 @@ public class MainActivity extends AppCompatActivity
 		navigationView.setNavigationItemSelectedListener(this);
 		checkuser();
 		fetch();
+		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+			NotificationChannel channel = new NotificationChannel("Noty","Noty", NotificationManager.IMPORTANCE_DEFAULT);
+			NotificationManager manager = getSystemService(NotificationManager.class);
+			manager.createNotificationChannel(channel);
+		}
+		FirebaseMessaging.getInstance().subscribeToTopic("weather")
+				.addOnCompleteListener(new OnCompleteListener<Void>() {
+					@Override
+					public void onComplete(@NonNull Task<Void> task) {
+						String msg ="Done";
+						if (!task.isSuccessful()) {
+							msg = "Fail";
+						}
+						Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+					}
+				});
 
 	}
+
 
 	private void checkuser() {
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -178,8 +200,6 @@ public class MainActivity extends AppCompatActivity
 						i.putExtra("s_Image",model.getImage());
 						Log.v("TT","I click Main ");
 						startActivity(i);
-
-
 				});
 				holder.details.setOnClickListener(view -> {
 					Intent i = new Intent(getApplicationContext(),ItemCheckView.class);
@@ -289,7 +309,7 @@ public class MainActivity extends AppCompatActivity
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(@org.jetbrains.annotations.NotNull MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.

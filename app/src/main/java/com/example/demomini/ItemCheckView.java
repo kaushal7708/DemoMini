@@ -42,6 +42,7 @@ public class ItemCheckView extends AppCompatActivity {
 				Log.v("TT","Image View Only");
 				startActivity(i);
 
+
 			}
 		});
 				}
